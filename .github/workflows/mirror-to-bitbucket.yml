@@ -15,4 +15,7 @@ jobs:
       - name: Mirror to Bitbucket
         uses: heussd/mirror-to-bitbucket-github-action@v2
         with:
+          username: learning092-admin
+          spacename: learning092
+          repository: bitbuckettesting
           password: ${{ secrets.BITBUCKET_PASSWORD }}
