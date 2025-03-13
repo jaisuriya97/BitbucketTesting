@@ -11,6 +11,10 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0 
+      - name: Disable GPG verification
+        run: |
+          git config --global commit.gpgSign false
+          git config --global tag.gpgSign false
       - name: Git User Random GPG Key
         uses: iwishiwasaneagle/git-user-random-gpg@v1
         with:
