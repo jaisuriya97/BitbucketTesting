@@ -15,11 +15,6 @@ jobs:
         run: |
           git config --global commit.gpgSign false
           git config --global tag.gpgSign false
-      - name: Git User Random GPG Key
-        uses: iwishiwasaneagle/git-user-random-gpg@v1
-        with:
-          email: jaisuriya200297@gmail.com
-          name: jaisuriya092
       - name: Mirror to Bitbucket
         uses: heussd/mirror-to-bitbucket-github-action@v2
         with:
