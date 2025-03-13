@@ -1,1 +1,1 @@
-conole.log("Hello")
+conole.log("Hello mom !")
