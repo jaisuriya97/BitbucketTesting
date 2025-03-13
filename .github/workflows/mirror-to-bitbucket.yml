@@ -7,12 +7,12 @@ jobs:
   mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: Disable GPG Signing
-        run: git config commit.gpgsign false
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0 
+      - name: setup-gpg
+        uses: olafurpg/setup-gpg@v3
       - name: Mirror to Bitbucket
         uses: heussd/mirror-to-bitbucket-github-action@v2
         with:
