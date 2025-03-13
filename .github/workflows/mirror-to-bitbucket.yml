@@ -1,24 +1,30 @@
-name: Mirror to Bitbucket
+name: Sync to Bitbucket
 
 on:
   push:
+    branches:
+      - main  # Change this to the branch you want to sync
 
 jobs:
-  mirror:
+  sync:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 
-      - name: Disable GPG verification
+      - name: Checkout GitHub repository
+        uses: actions/checkout@v4
+
+      - name: Set up Git
         run: |
-          git config --global commit.gpgSign false
-          git config --global tag.gpgSign false
-      - name: Mirror to Bitbucket
-        uses: heussd/mirror-to-bitbucket-github-action@v2
-        with:
-          username: learning092-admin
-          spacename: learning092
-          repository: bitbuckettesting
-          password: ${{ secrets.BITBUCKET_PASSWORD }}
+          git config --global user.name "jaisuriya092"
+          git config --global user.email "jaisuriya200297@gmail.com"
+
+      - name: Push to Bitbucket
+        run: |
+          git clone --mirror https://x-access-token:${{ secrets.BITBUCKET_PASSWORD }}@bitbucket.org/learning092-admin/bitbuckettesting.git bitbucket_repo
+          cd bitbucket_repo
+          git remote add github-origin https://github.com/jaisuriya97/BitbucketTesting/
+          git fetch github-origin
+          git push origin --mirror
+
+    env:
+      BITBUCKET_APP_PASSWORD: ${{ secrets.BITBUCKET_PASSWORD }}
