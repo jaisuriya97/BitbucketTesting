@@ -22,7 +22,7 @@ jobs:
 
       - name: Reformat Git History to Change Committer
         run: |
-          git checkout main
+          git checkout Testbranch
           git commit --amend --no-edit --author="learning092-admin <200701092@rajalakshmi.edu.in>"
           git rebase --root --committer-date-is-author-date
         
@@ -33,3 +33,5 @@ jobs:
           spacename: learning092
           repository: BitbucketTesting
           password: ${{ secrets.BITBUCKET_PASSWORD }}
+
+
