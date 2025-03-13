@@ -27,4 +27,4 @@ jobs:
           git push origin --mirror
 
     env:
-      BITBUCKET_APP_PASSWORD: ${{ secrets.BITBUCKET_PASSWORD }}
+      BITBUCKET_PASSWORD: ${{ secrets.BITBUCKET_PASSWORD }}
