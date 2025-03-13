@@ -20,7 +20,7 @@ jobs:
 
       - name: Push to Bitbucket
         run: |
-          git clone --mirror https://x-access-token:${{ secrets.BITBUCKET_PASSWORD }}@bitbucket.org/learning092-admin/bitbuckettesting.git bitbucket_repo
+          git clone --mirror https://x-access-token:${{ secrets.BITBUCKET_PASSWORD }}@bitbucket.org/learning092/bitbuckettesting.git bitbucket_repo
           cd bitbucket_repo
           git remote add github-origin https://github.com/jaisuriya97/BitbucketTesting/
           git fetch github-origin
