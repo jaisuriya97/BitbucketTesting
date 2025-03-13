@@ -1,19 +1,35 @@
-name: Sync to Bitbucket
+
+name: Mirror to Bitbucket
 
 on:
   push:
-    branches:
-      - main  # Change this to the branch you want to sync
 
 jobs:
-  sync:
+  mirror:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Push to Bitbucket
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 
+          
+      - name: Configure Git User (Force Bitbucket User as "learning092-admin")
         run: |
-          git clone --mirror https://bitbucket.org/learning092/bitbuckettesting/ bitbucket_repo
-          cd bitbucket_repo
-          git remote add github-origin https://github.com/jaisuriya97/BitbucketTesting/
-          git fetch github-origin
-          git push origin --mirror
+          git config --global user.name "learning092-admin"
+          git config --global user.email "200701092@rajalakshmi.edu.in"
+          git config --global commit.gpgsign false
+          git config --global tag.gpgSign false
+
+      - name: Reformat Git History to Change Committer
+        run: |
+          git checkout main
+          git commit --amend --no-edit --author="learning092-admin <200701092@rajalakshmi.edu.in>"
+          git rebase --root --committer-date-is-author-date
+        
+      - name: Mirror to Bitbucket
+        uses: heussd/mirror-to-bitbucket-github-action@v2
+        with:
+          username: learning092-admin
+          spacename: learning092
+          repository: BitbucketTesting
+          password: ${{ secrets.BITBUCKET_PASSWORD }}
