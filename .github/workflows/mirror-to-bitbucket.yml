@@ -12,11 +12,6 @@ jobs:
         with:
           fetch-depth: 0 
 
-      # - name: Set up Git
-      #   run: |
-      #     git config --global user.email "you@example.com"
-      #     git config --global user.name "Your Name"
-      
       - name: Mirror to Bitbucket
         uses: heussd/mirror-to-bitbucket-github-action@v2
         with:
@@ -24,8 +19,3 @@ jobs:
           spacename: learning092
           repository: bitbuckettesting
           password: ${{ secrets.BITBUCKET_PASSWORD }}
-
-      - name: Push to Bitbucket with no-verify
-        run: git push --no-verify
-        env:
-          BITBUCKET_PASSWORD: ${{ secrets.BITBUCKET_PASSWORD }}
